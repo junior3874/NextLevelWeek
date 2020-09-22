@@ -13,6 +13,7 @@ export default class CreatePointsControllers{
     // }
 
     async create(req: Request, res: Response){
+        
         const {
 					image,
 					name,
@@ -22,13 +23,22 @@ export default class CreatePointsControllers{
 					city,
 					items
 				} = req.body;
-
+				
+				const itens = {
+					image,
+					name,
+					adress,
+					adress2,
+					state,
+					city,
+					items
+				}
 				const trx = await db.transaction();
 				
 				try{
-					await trx('points').insert({image, name, adress, adress2, state, city, items});
+					await trx('points').insert(itens);
 					await trx.commit();
-					return res.status(201).send();
+					return res.status(201).send('tudo certo');
 				}catch(err){
 					console.log(err);
 				}

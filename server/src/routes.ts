@@ -2,7 +2,6 @@ import express from 'express'
 import CreatePointsControllers from './controllers/PointsControllers';
 
 const routes = express.Router();
-console.log('log', routes)
 
 const createPointsController = new CreatePointsControllers();
 
