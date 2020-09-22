@@ -11,7 +11,17 @@ export default class CreatePointsControllers{
     //         const {..filters} as string;
 
     // }
-
+    
+		async index(req: Request, res: Response){
+			
+      const { state, city } = req.body;
+      
+      const points = await db('points')
+        .where({ state, city }).select('*');
+        return res.json(points);
+  
+    }
+      
     async create(req: Request, res: Response){
         
         const {
@@ -24,25 +34,15 @@ export default class CreatePointsControllers{
 					items
 				} = req.body;
 				
-				const itens = {
-					image,
-					name,
-					adress,
-					adress2,
-					state,
-					city,
-					items
-				}
 				const trx = await db.transaction();
 				
 				try{
-					await trx('points').insert(itens);
+					await trx('points').insert({image,name,adress,adress2,state,city,items});
 					await trx.commit();
-					return res.status(201).send('tudo certo');
+					return res.status(201).send();
 				}catch(err){
 					console.log(err);
 				}
-
     }
 
     // const query = `

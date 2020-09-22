@@ -6,6 +6,8 @@ const routes = express.Router();
 const createPointsController = new CreatePointsControllers();
 
 routes.post('/savepoint', createPointsController.create);
+routes.get('/points', createPointsController.index);
+
 
 //     //req.body: O corpo do formulário
 //     const query = `
