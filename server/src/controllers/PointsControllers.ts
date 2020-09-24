@@ -19,21 +19,12 @@ export default class CreatePointsControllers{
       const points = await db('points')
         .where({ state, city }).select('*');
         return res.json(points);
-  
+        
     }
       
     async create(req: Request, res: Response){
         
-        const {
-					image,
-					name,
-					adress,
-					adress2,
-					state,
-					city,
-					items
-				} = req.body;
-				
+        const {image,name,adress,adress2,state,city,items} = req.body;
 				const trx = await db.transaction();
 				
 				try{
